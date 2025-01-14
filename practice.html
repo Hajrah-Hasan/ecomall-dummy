@@ -1,0 +1,251 @@
+<!-- Product Detail Page (product-detail.html) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/9884a11afa.js" crossorigin="anonymous"></script>
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+</head>
+<style>
+    .quantity-selector {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        overflow: hidden;
+        width: max-content;
+        height: 30px;
+        width: 110px;
+
+    }
+
+    .quantity-selector .btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        background-color: #f5f5f5;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease;
+    }
+
+    .quantity-selector .btn:hover {
+        background-color: #e0e0e0;
+    }
+
+    .quantity-selector input[type="number"] {
+        width: 60px;
+        height: 40px;
+        text-align: center;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+        outline: none;
+        -moz-appearance: textfield;
+    }
+
+    .quantity-selector input[type="number"]::-webkit-outer-spin-button,
+    .quantity-selector input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .heart-icon {
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        background-image: url('https://img.icons8.com/?size=100&id=86&format=png&color=000000');
+        /* Hollow heart icon */
+        background-size: cover;
+        cursor: pointer;
+
+        transition: background-image 0.3s ease;
+    }
+
+    .heart-icon.active {
+        background-image: url('https://img.icons8.com/?size=100&id=zkTZNXGR64dz&format=png&color=000000');
+        /* Filled red heart icon */
+    }
+
+    .accordion {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    .accordion-question {
+        width: 100%;
+        text-align: left;
+        background-color: transparent;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 10px 0;
+
+    }
+
+    .accordion-answer {
+        display: none;
+        padding: 10px 0;
+        color: #555;
+    }
+</style>
+
+<body>
+    <div id="productDetail" class="  ">
+        <button onclick="window.history.back()" class="text-gray-500 hover:text-gray-700 float-right mb-2"> Go Back</button><br>
+        <div class=" flex flex-col md:flex-row ">
+            <div class="p-2.5 md:px-5 lg:ps-12 sm:pb-5 md:w-3/5 lg:w-[55%] md:pt-12">
+                <img src="https://ecomall-be87.kxcdn.com/ecomall/wp-content/uploads/2023/03/78.jpg" alt="Product Image"
+                    class="border rounded-md border-gray-200 ">
+            </div>
+            <div class="px-4 sm:px-10 md:pe-6 md:ps-2 lg:px-4  md:w-2/5   md:pt-12">
+                <h1 class="text-2xl lg:pt-3"> Hp laptop</h1>
+                <p class="text-lg py-2 lg:py-3 xl:py-4  font-bold ">$ 35 </p>
+                <div class="pb-4 ">
+                    <hr class=" border-t- border-gray-300 w-full ">
+                </div>
+                <div class="flex sm:justify-between  lg:py-3 xl:pt-2">
+                    <div class="quantity-selector">
+                        <button class="btn decrease" onclick="updateQuantity(-1)">-</button>
+                        <input type="number" id="product-quantity" value="1" min="1">
+                        <button class="btn increase" onclick="updateQuantity(1)">+</button>
+                    </div>
+                    <div class=" w-px mx-3  bg-gray-400"></div>
+
+                    <!-- <div class="px-2 ">| </div> -->
+                    <div class="wishlist pe-1">
+                        <span><i id="heart-icon" class="heart-icon" onclick="toggleWishlist()"></i>
+                            Add to whishlist </span>
+                    </div>
+                </div>
+
+                <button class="w-full bg-gray-900 text-white lg:font-semibold lg:text-lg px-9 py-2 rounded mt-7 lg:py-3 hover:bg-gray-600">Add to
+                    Cart</button>
+                <div class=" pt-5 pb-4">
+                    <hr class=" border-t- border-gray-300 w-full ">
+                </div>
+                <h1 class="text-xl font-bold pb-7 sm:font-extrabold tracking-wide">Description</h1>
+
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempora vitae iusto aliquid
+                    dolores perspiciatis commodi delectus minus sed obcaecati.</p>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-question" onclick="toggleAnswer('answer1')">
+                            What is the return policy?
+                        </button>
+                        <div id="answer1" class="accordion-answer">
+                            <p>Our return policy allows returns within 30 days of purchase with a full refund.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-question" onclick="toggleAnswer('answer2')">
+                            How can I track my order?
+                        </button>
+                        <div id="answer2" class="accordion-answer">
+                            <p>You can track your order using the tracking number provided in your confirmation email.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+        <script>
+            // JavaScript to handle mobile menu toggle
+            document.getElementById('menu-toggle').addEventListener('click', function () {
+                var menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+
+            // Function to toggle dropdowns in mobile view
+            function toggleDropdown(id) {
+                var dropdown = document.getElementById(id);
+                dropdown.classList.toggle('hidden');
+            }
+        </script>
+        </header>
+
+
+        </script>
+
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+        <script>function updateQuantity(change) {
+                const quantityInput = document.getElementById("product-quantity");
+                let currentQuantity = parseInt(quantityInput.value);
+
+                if (currentQuantity + change > 0) {
+                    quantityInput.value = currentQuantity + change;
+                }
+            }
+        </script>
+        <script>
+            function toggleWishlist() {
+                const heartIcon = document.getElementById("heart-icon");
+                heartIcon.classList.toggle("active");
+            }
+
+        </script>
+
+        <script>
+            function toggleAnswer(answerId) {
+                const answer = document.getElementById(answerId);
+                if (answer.style.display === "block") {
+                    answer.style.display = "none";
+                } else {
+                    answer.style.display = "block";
+                }
+            }
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
